@@ -1,0 +1,81 @@
+.logo {
+  float: left;
+  padding-right: 20px;
+}
+
+.sve {
+  padding-left: 50px;
+}
+.lijevi-meni {
+  float: left;
+  padding-right: 50px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 50px;
+}
+.lijevi-aktivni {
+  float: left;
+  padding-right: 50px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 50px;
+  margin: auto;
+  padding-left: 50px;
+}
+.lijevi-aktivni a {
+  text-decoration: none;
+  color: black;
+}
+.lijevi-aktivni:hover {
+  background-color: #b3ccff;
+}
+
+.lijevi-meni ol {
+  list-style-type: none;
+}
+.lijevi-meni ol li {
+  padding-left: 17px;
+  padding-right: 17px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  background-color: #f0f0f5;
+}
+.linija {
+  float: right;
+}
+body {
+  max-width: 1200px;
+  margin: auto;
+  background-color: #f0f0f5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+table {
+  background-color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 800px;
+  position: relative;
+  padding-bottom: 30px;
+}
+table tr td {
+  padding-left: 0px;
+}
+hr {
+  color: #ccddff;
+  border-radius: 1px;
+  border-top: 1px;
+  border-color: #ccddff;
+  margin-left: 0px;
+}
+ol li:hover {
+  background-color: #b3ccff;
+}
+ol li a {
+  color: black;
+  outline: none;
+  border-style: none;
+  text-decoration: none;
+}
+.sredina {
+  padding-bottom: 50px;
+}
