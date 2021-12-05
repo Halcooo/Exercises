@@ -1,0 +1,51 @@
+.container {
+  max-width: 400px;
+  margin: 10vh auto 0 auto;
+  box-shadow: 0px 0px 43px 18px rgba(153, 153, 153, 1);
+}
+.display-warper {
+  background-color: lightgrey;
+}
+#display {
+  text-align: right;
+  height: 70px;
+  line-height: 70px;
+  padding: 25px;
+  font-size: 25px;
+  border: 1px solid #999;
+  background-color: cornsilk;
+  border-radius: 22px;
+}
+.buttons {
+  display: grid;
+  border-bottom: 1px solid #999;
+  border-left: 1px solid #999;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  border-top: 1px solid #999;
+  border-right: 1px solid #999;
+  background-color: lightgray;
+}
+.button {
+  border: 0.5px solid #999;
+  line-height: 100px;
+  text-align: center;
+  font-size: 25px;
+  cursor: pointer;
+  border-radius: 12px;
+  background-color: cornsilk;
+}
+#jednako {
+  background-color: rgba(3, 3, 82, 0.849);
+  color: white;
+}
+#jednako:hover {
+  background-color: #5555ff;
+  color: blanchedalmond;
+  transition: 0.32s;
+}
+.button:hover {
+  background-color: #5555ff;
+  color: blanchedalmond;
+  transition: 0.32s;
+}
