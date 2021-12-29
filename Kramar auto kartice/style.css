@@ -1,0 +1,45 @@
+body {
+  background-color: rgb(231, 225, 225);
+}
+.wrapper {
+  float: left;
+  width: 310px;
+  background-color: rgb(255, 246, 246);
+  margin-left: 20px;
+  border-radius: 0px 0px 10px 10px;
+  margin-top: 30px;
+}
+.naslov {
+  color: #333;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 22px;
+  text-align: left;
+  float: none;
+  padding-left: 15px;
+  overflow: hidden;
+  height: 92px;
+  padding-right: 15px;
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgb(218, 213, 213);
+}
+.paragraf {
+  color: #666;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: left;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.zaLiniju {
+  border-bottom: 1px solid rgb(218, 213, 213);
+}
+.godina {
+  float: left;
+}
+.kilometri {
+  float: right;
+  padding-right: 15px;
+}
