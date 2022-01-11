@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      id="platno"
+      onmousemove="koordinate(event)"
+      onmousedown="pocni(event)"
+      onmouseup="prestani()"
+    ></div>
+    <p style="display: inline">Izaberi boju linije</p>
+    <input id="boja" type="color" />
+    <br />
+    <br />
+    <p style="display: inline">Izaberi debljinu linije</p>
+    <input id="deb" type="range" name="" min="2" max="18" />
+    <br />
+    <br />
+    <p style="display: inline">Izaberi tip linije</p>
+    <button id="krug" onclick="krug()">Krug</button>
+    <button id="Kvadrat" onclick="kvadrat()">Kvadrat</button>
+
+    <script src="script.js"></script>
+  </body>
+</html>

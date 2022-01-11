@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+}
+#platno {
+  width: 500px;
+  height: 300px;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
