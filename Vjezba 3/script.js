@@ -129,7 +129,9 @@ function postBLog() {
         blogTitle,
         blogDesc,
         postDate: new Date(),
-        author: loggedUser.name
+        author: loggedUser.name,
+        comments:[],
+
     };
 
     allBlogs.push(blog);
@@ -160,6 +162,7 @@ function searchBlogs(e) {
 }
 
 function renderBlogs(blogs) {
+    blogs.sort((a,b)=>new Date(b.postDate)-new Date(a.postDate));
     var publishedBlogs = document.getElementById('published-blogs')
     publishedBlogs.innerHTML = '';
     for (var blog of blogs) {
@@ -175,10 +178,99 @@ function renderBlogs(blogs) {
         var datum = document.createElement('i');
         datum.style.paddingLeft = '30px';
         datum.innerHTML = new Date(blog.postDate).toLocaleString();
+        var btn =document.createElement('button');
+        btn.innerText='Izbriši';
+        btn.addEventListener
         div.appendChild(p);
         div.appendChild(span);
         div.appendChild(datum);
         publishedBlogs.appendChild(h3);
-        publishedBlogs.appendChild(div)
+        deleteBlog(blog);
+        publishedBlogs.appendChild(div);
+       showComments(blog.comments);
+        publishedBlogs.appendChild(addComment(blog));
+
     }
+} function addComment(blog){
+    var input=document.createElement('input');
+    input.classList.add('blog-input');
+    input.placeholder='Leave a comment....';
+    input.style='width:50%;margin-left:50%;margin-top:5px'
+    input.addEventListener('keyup',function(e){
+        var text =e.target.value;
+        if(e.keyCode!=13)return;
+       
+        var comment ={
+            text,
+            author:loggedUser.name,
+            postedDate:new Date()
+        }
+        if(!blog.comments){
+            blog.comments=[];
+    
+        }
+        blog.comments.push(comment);
+        localStorage.setItem('blogs',JSON.stringify(allBlogs))
+        input.value='';
+        
+ renderBlogs(allBlogs);
+            
+            
+        
+        
+    })
+    return input;
+}
+function showComments(comments,parentEl){
+    var publishedBlogs = document.getElementById('published-blogs');
+    for (var comment of comments) {
+
+var div = document.createElement('div');
+div.style='width:60%;margin-left:40%;padding=7px;margin-top:5px;'
+ div.classList.add('posted-blog');
+        var p = document.createElement('p');
+        p.innerHTML = comment.text;
+        p.style='margin-bottom:5px;padding:3px'
+        var span = document.createElement('span');
+        span.innerHTML = `Author: ${comment.author}`;
+        var datum = document.createElement('i');
+        datum.style.paddingLeft = '30px';
+        datum.innerHTML = new Date(comment.postedDate).toLocaleString();
+        div.appendChild(p);
+        div.appendChild(span);
+        div.appendChild(datum);
+        publishedBlogs.appendChild(div);
+    }
+    
+}
+function deleteBlog(blog){
+    var publishedBlogs = document.getElementById('published-blogs');
+
+    var btn =document.createElement('button');
+    btn.innerText='X';
+    btn.classList.add('delete')
+    if(loggedUser.name!=blog.author){btn.style='display:none'}
+    
+    
+    btn.addEventListener('click',function(e){
+        var response =confirm('Jeste li sigurni?')
+        if(loggedUser.name==blog.author){
+        
+        if(response)return;
+            for(var i=0;i<allBlogs.length;i++){
+                allBlogs.splice(i,1);
+                
+                localStorage.setItem('blogs',JSON.stringify(allBlogs));
+                renderBlogs(allBlogs);
+                
+            }
+            
+
+            
+        }else{
+            alert('Vi nise autor ovog bloga!!')
+        }
+    })
+    publishedBlogs.appendChild(btn);
+    return btn;
 }

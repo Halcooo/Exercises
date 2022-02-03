@@ -1,7 +1,11 @@
-body {
-    background-color: aquamarine;
+body { 
+    background-image: url('https://www.business2community.com/wp-content/uploads/2020/08/The-Importance-of-Blogs-to-Increase-Engagement-.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     box-sizing: border-box;
     margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 .login-form {
@@ -64,13 +68,16 @@ body {
 
 .nav {
     height: 70px;
-    background-color: salmon; 
+    background-color: #6a4ff0; 
     position: relative;
     display: none;
 }
 
 .logout-block {
     position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 5px;
     right: 20px;
     padding: 10px 4px;
 }
@@ -100,7 +107,8 @@ body {
 }
 
 .posted-blog {
-    background-color: #fff;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, .8);
     border-radius: 10px;
     padding: 20px;
     font-size: 18px;
@@ -110,4 +118,21 @@ body {
     font-size: 24px;
     padding-left: 20px;
     margin-bottom: 10px;
+    color: #4eed74;
+}
+.delete{
+    font-weight: 900;
+    font-size: 20px;
+    background-color: lightsalmon;
+    border: none;
+    float:right;
+    border-radius: 6px;
+   
+    
+
+}
+.delete:hover{
+    background-color: maroon;
+    cursor: pointer;
+
 }
