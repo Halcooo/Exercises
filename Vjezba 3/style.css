@@ -147,5 +147,25 @@ body {
     color: red;
 }
 
-.add-blog-form { 
+
+.fa{
+    font-size: 25px;
+    
+    padding: 4px;
+    color:blue;
+    
+}
+.fa:hover{
+    font-weight: bolder;
+    cursor: pointer;
+}
+.like-wrapper{
+    margin-right: 10px;
+    float: right;
+}
+.fa-thumbs-o-down{
+    color: red;
+}
+.fa-thumbs-down{
+    color:red;
 }
