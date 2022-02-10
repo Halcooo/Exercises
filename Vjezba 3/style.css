@@ -1,5 +1,5 @@
 body { 
-    background-image: url('https://www.business2community.com/wp-content/uploads/2020/08/The-Importance-of-Blogs-to-Increase-Engagement-.jpg');
+    background-image: url('https://assets.keap.com/image/upload/b_rgb:FFFFFF,c_limit,dpr_2,f_auto,h_395,q_95,w_569/v1535052909/infusionsoft.com/homepage/GettyImages-626669886.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -8,12 +8,17 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.wrapper {
+    display: block;
+}
+
 .login-form {
     width: 300px;
     background-color: #fff;
     border-radius: 10px;
     padding: 40px;
     margin:5% auto; 
+    display: none;
 
 }
 
@@ -68,23 +73,31 @@ body {
 
 .nav {
     height: 70px;
-    background-color: #6a4ff0; 
-    position: relative;
-    display: none;
+    background-color: #877bbe; 
+    position: sticky; 
+    top: 0;
+    z-index: 1;
+}
+
+.user-info {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    padding: 10px 4px;
+    align-items: center;
+    gap: 10px;
+
 }
 
 .logout-block {
-    position: absolute;
     display: flex;
     align-items: center;
     gap: 5px;
-    right: 20px;
-    padding: 10px 4px;
 }
 
 .blog-area {
-    position: relative;
-    top: 70px;
+    position: relative; 
     width: 800px;
     margin: auto;
     padding: 20px;
@@ -119,20 +132,20 @@ body {
     padding-left: 20px;
     margin-bottom: 10px;
     color: #4eed74;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
-.delete{
-    font-weight: 900;
-    font-size: 20px;
-    background-color: lightsalmon;
+
+.blog-delete-btn {
     border: none;
-    float:right;
-    border-radius: 6px;
-   
-    
-
+    background: #fff;
+    border-radius: 4px; 
 }
-.delete:hover{
-    background-color: maroon;
-    cursor: pointer;
 
+.blog-delete-btn:hover {
+    color: red;
+}
+
+.add-blog-form { 
 }

@@ -1,3 +1,7 @@
+var logoutBlock = document.querySelector('.logout-block');
+var addForm = document.querySelector('.add-blog-form');
+var signIn = document.querySelector('.sign-in');
+
 var users = [{
     name: 'John Doe',
     email: 'john.doe@gmail.com',
@@ -7,7 +11,6 @@ var users = [{
 }];
 
 var loggedUser = {};
-
 
 var allBlogs = [];
 
@@ -19,6 +22,10 @@ function isUserLogged() {
     if (userData) {
         var user = JSON.parse(userData);
         login(user.email, user.password);
+    } else {
+        hide(logoutBlock);
+        hide(addForm);
+        displayBlog()
     }
 }
 
@@ -36,10 +43,13 @@ function login(p_email, p_password) {
         if ((email === user.email || email === user.username) && password === user.password) {
             var loginForm = document.getElementById('login-form');
             loginForm.style.display = 'none';
-            var nav = document.querySelector('.nav');
+            hide(signIn);
+            var nav = document.querySelector('.wrapper');
             nav.style.display = 'block';
             var name = document.getElementById('user-name');
             name.innerHTML = user.name;
+            addForm.style.display = 'block';
+            logoutBlock.style.display = 'flex';
             loggedUser = user;
             localStorage.setItem('loggedUser', JSON.stringify(loggedUser));
             clearValue('email');
@@ -63,9 +73,10 @@ function loginOnEnter(e) {
 function logout() {
     var loginForm = document.getElementById('login-form');
     loginForm.style.display = 'block';
-    var nav = document.querySelector('.nav');
+    var nav = document.querySelector('.wrapper');
     nav.style.display = 'none';
     document.querySelector('#login-form .error-msg').style.display = 'none';
+    loggedUser = {};
     localStorage.removeItem('loggedUser');
 }
 
@@ -130,8 +141,7 @@ function postBLog() {
         blogDesc,
         postDate: new Date(),
         author: loggedUser.name,
-        comments:[],
-
+        comments: []
     };
 
     allBlogs.push(blog);
@@ -162,75 +172,68 @@ function searchBlogs(e) {
 }
 
 function renderBlogs(blogs) {
-    blogs.sort((a,b)=>new Date(b.postDate)-new Date(a.postDate));
+    blogs.sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
     var publishedBlogs = document.getElementById('published-blogs')
     publishedBlogs.innerHTML = '';
     for (var blog of blogs) {
         var h3 = document.createElement('h3');
         h3.innerHTML = blog.blogTitle;
         h3.classList.add('blog-title');
+        h3.appendChild(createDeleteBtn(blog));
         var div = document.createElement('div');
         div.classList.add('posted-blog');
         var p = document.createElement('p');
         p.innerHTML = blog.blogDesc;
         var span = document.createElement('span');
-        span.innerHTML = `Author: ${blog.author}`;
+        span.innerHTML = `Author: <span style="font-weight:bold;">${blog.author}</span>`;
         var datum = document.createElement('i');
         datum.style.paddingLeft = '30px';
         datum.innerHTML = new Date(blog.postDate).toLocaleString();
-        var btn =document.createElement('button');
-        btn.innerText='Izbriši';
-        btn.addEventListener
         div.appendChild(p);
         div.appendChild(span);
         div.appendChild(datum);
         publishedBlogs.appendChild(h3);
-        deleteBlog(blog);
         publishedBlogs.appendChild(div);
-       showComments(blog.comments);
-        publishedBlogs.appendChild(addComment(blog));
-
+        showComments(blog.comments)
+        publishedBlogs.appendChild(addComment(blog))
     }
-} function addComment(blog){
-    var input=document.createElement('input');
+}
+
+function addComment(blog) {
+    var input = document.createElement('input');
     input.classList.add('blog-input');
-    input.placeholder='Leave a comment....';
-    input.style='width:50%;margin-left:50%;margin-top:5px'
-    input.addEventListener('keyup',function(e){
-        var text =e.target.value;
-        if(e.keyCode!=13)return;
-       
-        var comment ={
+    input.placeholder = 'Leave a comment...';
+    input.style = 'width:40%;margin-left:60%;margin-top:5px;';
+    input.addEventListener('keyup', function (e) {
+        var text = e.target.value;
+        if (e.keyCode !== 13) return;
+        if (isGuest())  return alert('Molimo Vas registrujte se');
+        var comment = {
             text,
-            author:loggedUser.name,
-            postedDate:new Date()
+            author: loggedUser.name,
+            postedDate: new Date()
         }
-        if(!blog.comments){
-            blog.comments=[];
-    
+        if (!blog.comments) {
+            blog.comments = [];
         }
+
         blog.comments.push(comment);
-        localStorage.setItem('blogs',JSON.stringify(allBlogs))
-        input.value='';
-        
- renderBlogs(allBlogs);
-            
-            
-        
-        
-    })
+        localStorage.setItem('blogs', JSON.stringify(allBlogs));
+        input.value = '';
+        renderBlogs(allBlogs)
+    });
     return input;
 }
-function showComments(comments,parentEl){
-    var publishedBlogs = document.getElementById('published-blogs');
-    for (var comment of comments) {
 
-var div = document.createElement('div');
-div.style='width:60%;margin-left:40%;padding=7px;margin-top:5px;'
- div.classList.add('posted-blog');
+function showComments(comments) {
+    var publishedBlogs = document.getElementById('published-blogs')
+    for (var comment of comments) {
+        var div = document.createElement('div');
+        div.classList.add('posted-blog');
+        div.style = 'width:60%;margin-left:40%;margin-top:4px;padding:7px 15px;'
         var p = document.createElement('p');
         p.innerHTML = comment.text;
-        p.style='margin-bottom:5px;padding:3px'
+        p.style = 'margin-bottom:5px;margin-top:5px;'
         var span = document.createElement('span');
         span.innerHTML = `Author: ${comment.author}`;
         var datum = document.createElement('i');
@@ -241,36 +244,29 @@ div.style='width:60%;margin-left:40%;padding=7px;margin-top:5px;'
         div.appendChild(datum);
         publishedBlogs.appendChild(div);
     }
-    
+
 }
-function deleteBlog(blog){
-    var publishedBlogs = document.getElementById('published-blogs');
 
-    var btn =document.createElement('button');
-    btn.innerText='X';
-    btn.classList.add('delete')
-    if(loggedUser.name!=blog.author){btn.style='display:none'}
-    
-    
-    btn.addEventListener('click',function(e){
-        var response =confirm('Jeste li sigurni?')
-        if(loggedUser.name==blog.author){
-        
-        if(response)return;
-            for(var i=0;i<allBlogs.length;i++){
-                allBlogs.splice(i,1);
-                
-                localStorage.setItem('blogs',JSON.stringify(allBlogs));
-                renderBlogs(allBlogs);
-                
-            }
-            
-
-            
-        }else{
-            alert('Vi nise autor ovog bloga!!')
-        }
+function createDeleteBtn(blog) {
+    var btn = document.createElement('button');
+    btn.classList.add('blog-delete-btn');
+    btn.style.display = loggedUser.name === blog.author ? 'block' : 'none';
+    btn.innerHTML = '<i class="fa fa-trash" style="font-size:22px;cursor: pointer;"></i>'
+    btn.addEventListener('click', function () {
+        var index = allBlogs.indexOf(blog);
+        var response = confirm('Jeste li sigurni?');
+        if (!response) return;
+        allBlogs.splice(index, 1);
+        //localStorage.setItem('blogs',JSON.stringify(allBlogs));
+        renderBlogs(allBlogs);
     })
-    publishedBlogs.appendChild(btn);
     return btn;
+}
+
+function isGuest() {
+    return !loggedUser.name;
+}
+
+function hide(el) {
+    el.style.display = 'none';
 }
