@@ -1,0 +1,28 @@
+#div {
+  font-size: 40px;
+  font-family: "Chakra Petch", sans-serif;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+#container {
+  display: flex;
+  background-color: rgb(136, 134, 134);
+  margin: auto;
+  width: 600px;
+  padding: 25px;
+  justify-content: center;
+  flex-direction: column;
+}
+.btns {
+  align-self: center;
+}
+#laps {
+  display: flex;
+  font-size: larger;
+  flex-direction: column;
+}
+h1 {
+  text-align: center;
+}
